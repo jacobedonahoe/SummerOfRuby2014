@@ -10,19 +10,19 @@ class BankAccount
   def deposit(amount)
     @balance = 0 if @balance.nil?
     @balance += amount
-    @transaction = {type: "deposit", amount: amount}
-    @transactions << @transaction
+    transaction = {type: "deposit", amount: amount}
+    @transactions << transaction
   end
 
   def init
     @balance = 0
-    @transactions = [:type,:amount]
+    @transactions = []
   end
 
   def withdraw(amount)
     @balance -= amount
-    @transaction = {type: "withdrawl", amount: amount}
-    @transactions << @transaction
+    transaction = {type: "withdrawl", amount: amount}
+    @transactions << transaction
   end
 
   def name=(new_name)
@@ -31,8 +31,8 @@ class BankAccount
 
   def history
     puts %Q{History for account "TestAccount:"}
-    @transactions.each do |@transaction|
-      @transaction.each do |key, value|
+    @transactions.each do |transaction|
+      transaction.each do |key, value|
         puts %Q{#{key} of $#{value}}
       end
     end
