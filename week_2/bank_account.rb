@@ -29,6 +29,16 @@ class BankAccount
     @name = new_name
   end
 
+  def history
+    puts %Q{History for account "TestAccount:"}
+    @transactions.each do |@transaction|
+      @transaction.each do |key, value|
+        puts %Q{#{key} of $#{value}}
+      end
+    end
+    puts %Q{The account #{@name} has a balance of $#{@balance}}
+  end
+
   def name
     @name
   end
