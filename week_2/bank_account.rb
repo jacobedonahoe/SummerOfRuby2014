@@ -4,7 +4,7 @@ class BankAccount
   end
 
   def balance
-    @balance
+    puts %Q{The account "#{account.name}" has a balance of  $#{account.balance}.}
   end
 
   def deposit(amount)
@@ -14,7 +14,7 @@ class BankAccount
     @transactions << transaction
   end
 
-  def init
+  def initialize
     @balance = 0
     @transactions = []
   end
@@ -50,6 +50,5 @@ account.deposit 20
 account.deposit 20
 account.name= "TestAccount"
 
-puts %Q{The account "#{account.name}" has a balance of  $#{account.balance}.}
 
 
