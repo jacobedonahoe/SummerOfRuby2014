@@ -49,6 +49,7 @@ account = BankAccount.new
 account.deposit 20
 account.deposit 20
 account.name= "TestAccount"
+account.history
 
-
+puts "#{@transaction}"
 
