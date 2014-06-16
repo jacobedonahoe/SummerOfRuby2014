@@ -15,10 +15,6 @@ class BankAccount
     self.balance.to_s
   end
 
-  def interest(rate)
-    calculateInterest(rate, self.balance)
-  end
-
   def deposit(amount)
     raise WrongDataTypeForDepositError unless amount.is_a? Numeric
     @balance = 0 if @balance.nil?
@@ -73,5 +69,4 @@ account.name= "TestAccount"
 account.history
 
 puts account.history
-puts account.interest(15)
-account.deposit "twenty"
+puts account.CalculateInterest(15, self.balance)
