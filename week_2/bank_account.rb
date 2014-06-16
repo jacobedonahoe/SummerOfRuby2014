@@ -1,10 +1,23 @@
+module Interest
+  def calculateInterest(rate, balance)
+    calculateInterestResult = balance * (rate/100)
+    "at the rate of %#{rate}, this account will earn #{calculateInterestResult} 
+    in one year"
+  end
+end
+
+
 class BankAccount
+  include Interest
+  attr_accessor :name
+  attr_reader :balance
+
   def to_s
     self.balance.to_s
   end
 
-  def balance
-    puts %Q{The account "#{account.name}" has a balance of  $#{account.balance}.}
+  def interest(rate)
+    calculateInterest(rate, self.balance)
   end
 
   def deposit(amount)
@@ -25,23 +38,19 @@ class BankAccount
     @transactions << transaction
   end
 
-  def name=(new_name)
-    @name = new_name
-  end
-
   def history
-    puts %Q{History for account "TestAccount:"}
-    @transactions.each do |transaction|
-      transaction.each do |key, value|
-        puts %Q{#{key} of $#{value}}
-      end
+    output = @transactions.collect do |transaction|
+      "#{transaction[:type]} of $#{transaction[:amount]}"
     end
-    puts %Q{The account #{@name} has a balance of $#{@balance}}
+
+    banner = %Q{History for account "TestAccount:"\n}
+    banner << output.join("\n")
+    banner << %Q{\nThe account "#{@name}" has a balance of $#{@balance}}
   end
 
-  def name
-    @name
+  def summary
   end
+
 end
 
 
@@ -51,5 +60,5 @@ account.deposit 20
 account.name= "TestAccount"
 account.history
 
-puts "#{@transaction}"
-
+puts account.history
+puts account.interest(15)
