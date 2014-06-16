@@ -1,6 +1,6 @@
 module Interest
-  def calculateInterest(rate, balance)
-    calculateInterestResult = balance * (rate/100)
+  def calculate_interest(rate)
+    calculateInterestResult = self.balance * (rate/100)
     %Q{at the rate of %#{rate}, this account will earn
        #{calculateInterestResult} in one year}
   end
@@ -69,4 +69,4 @@ account.name= "TestAccount"
 account.history
 
 puts account.history
-puts account.CalculateInterest(15, self.balance)
+puts account.calculate_interest(15)
