@@ -21,10 +21,14 @@ class BankAccount
   end
 
   def deposit(amount)
-    @balance = 0 if @balance.nil?
-    @balance += amount
-    transaction = {type: "deposit", amount: amount}
-    @transactions << transaction
+    if amount.is_a? Numeric
+      @balance = 0 if @balance.nil?
+      @balance += amount
+      transaction = {type: "deposit", amount: amount}
+      @transactions << transaction
+    else
+      raise ArgumentError, "Deposit must be a numeric value" unless amount.is_a?
+    end
   end
 
   def initialize
