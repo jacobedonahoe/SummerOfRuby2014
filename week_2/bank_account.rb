@@ -1,11 +1,10 @@
 module Interest
   def calculateInterest(rate, balance)
     calculateInterestResult = balance * (rate/100)
-    "at the rate of %#{rate}, this account will earn #{calculateInterestResult} 
-    in one year"
+    %Q{at the rate of %#{rate}, this account will earn
+       #{calculateInterestResult} in one year}
   end
 end
-
 
 class BankAccount
   include Interest
@@ -21,14 +20,11 @@ class BankAccount
   end
 
   def deposit(amount)
-    if amount.is_a? Numeric
-      @balance = 0 if @balance.nil?
-      @balance += amount
-      transaction = {type: "deposit", amount: amount}
-      @transactions << transaction
-    else
-      raise ArgumentError, "Deposit must be a numeric value" unless amount.is_a?
-    end
+    raise WrongDataTypeForDepositError unless amount.is_a? Numeric
+    @balance = 0 if @balance.nil?
+    @balance += amount
+    transaction = {type: "deposit", amount: amount}
+    @transactions << transaction
   end
 
   def initialize
@@ -37,6 +33,7 @@ class BankAccount
   end
 
   def withdraw(amount)
+    raise WrongDataTypeForDepositError unless amount.is_a? Numeric
     @balance -= amount
     transaction = {type: "withdrawl", amount: amount}
     @transactions << transaction
@@ -57,6 +54,17 @@ class BankAccount
 
 end
 
+class WrongDataTypeForWithdrawlError < StandardError
+  def to_s
+    "The withdrawl amount must be a number."
+  end
+end
+
+class WrongDataTypeForDepositError < StandardError
+  def to_s
+    "The deposit amount must be a number."
+  end
+end
 
 account = BankAccount.new
 account.deposit 20
@@ -66,3 +74,4 @@ account.history
 
 puts account.history
 puts account.interest(15)
+account.deposit "twenty"
