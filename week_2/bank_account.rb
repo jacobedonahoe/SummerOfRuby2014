@@ -1,6 +1,6 @@
 module Interest
   def calculate_interest(rate)
-    calculateInterestResult = self.balance * (rate/100)
+    calculateInterestResult = self.balance * (rate.to_f/100)
     %Q{at the rate of %#{rate}, this account will earn
        #{calculateInterestResult} in one year}
   end
@@ -10,6 +10,12 @@ class BankAccount
   include Interest
   attr_accessor :name
   attr_reader :balance
+
+  def self.newS_with_name(starting_name)
+    account = BankAccount.new
+    account.name = starting_name
+    account
+  end
 
   def to_s
     self.balance.to_s
@@ -23,8 +29,9 @@ class BankAccount
     @transactions << transaction
   end
 
-  def initialize
-    @balance = 0
+  def initialize(starting_balance = 0, starting_name = "")
+    @balance = starting_balance
+    @name = starting_name
     @transactions = []
   end
 
@@ -62,11 +69,10 @@ class WrongDataTypeForDepositError < StandardError
   end
 end
 
-account = BankAccount.new
+account = BankAccount.new_with_name("Jacob's Savings Account")
 account.deposit 20
 account.deposit 20
-account.name= "TestAccount"
 account.history
 
 puts account.history
-puts account.calculate_interest(15)
+puts account.calculate_interest(15.0)
