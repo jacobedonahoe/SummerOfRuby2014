@@ -6,12 +6,22 @@ module Interest
   end
 end
 
+module Logger
+  def log(message)
+    output = "#{Time.now} : #{message}"
+    File.open("log.txt", "a") do |logfile|
+      logfile << output
+    end
+  end
+end
+
 class BankAccount
   include Interest
+  include Logger
   attr_accessor :name
   attr_reader :balance
 
-  def self.newS_with_name(starting_name)
+  def self.new_with_name(starting_name)
     account = BankAccount.new
     account.name = starting_name
     account
@@ -27,6 +37,7 @@ class BankAccount
     @balance += amount
     transaction = {type: "deposit", amount: amount}
     @transactions << transaction
+    log("You have depositied $#{amount}\n")
   end
 
   def initialize(starting_balance = 0, starting_name = "")
@@ -40,6 +51,7 @@ class BankAccount
     @balance -= amount
     transaction = {type: "withdrawl", amount: amount}
     @transactions << transaction
+    log("You have withdrawn $#{amount}\n")
   end
 
   def history
@@ -50,9 +62,6 @@ class BankAccount
     banner = %Q{History for account "TestAccount:"\n}
     banner << output.join("\n")
     banner << %Q{\nThe account "#{@name}" has a balance of $#{@balance}}
-  end
-
-  def summary
   end
 
 end
