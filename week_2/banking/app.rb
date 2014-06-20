@@ -1,3 +1,4 @@
+require_relative 'lib/Interest'
 require_relative 'lib/logger'
 require_relative 'lib/exceptions'
 require_relative 'lib/bank_account'
