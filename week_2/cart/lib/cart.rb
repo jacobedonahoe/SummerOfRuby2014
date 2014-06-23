@@ -13,7 +13,7 @@ class Cart
     if index
       items[index][:quantity] += 1
     else
-      items << {:item => item, :quantity => 1
+      items << {:item => item, :quantity => 1}
     end
   end
 
