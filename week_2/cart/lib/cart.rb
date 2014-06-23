@@ -1,4 +1,4 @@
-require relative "money_helper"
+require_relative "money_helper.rb"
 
 class Cart
   attr_reader :items
