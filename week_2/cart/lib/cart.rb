@@ -4,11 +4,11 @@ class Cart
   attr_reader :items
 
   def initialize
-    items = []
+    @items = []
   end
 
   def add_to_cart(item) 
-    index = self.items.find_index{|entry| entry[:item]== item}
+    index = self.items.find_index{|entry| entry[:item] == item}
 
     if index
       self.items[index][:quantity] += 1
