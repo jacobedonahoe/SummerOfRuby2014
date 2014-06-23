@@ -7,9 +7,9 @@ include MoneyHelper
 cart = Cart.new
 
 items = [
-  {"a" => Item.new("apple",1.00)},
-  {"b" => Item.new("banana",1.00)},
-  {"c" => Item.new("carrot",0.50)},
+  "a" => Item.new("apple",1.00),
+  "b" => Item.new("banana",1.00),
+  "c" => Item.new("carrot",0.50),
 ]
 
 keep_going = true
