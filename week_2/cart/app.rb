@@ -1,6 +1,6 @@
-require relative "lib/cart.rb"
-require relative "lib/item.rb"
-require relative "lib/money_helper.rb"
+require_relative "lib/cart.rb"
+require_relative "lib/item.rb"
+require_relative "lib/money_helper.rb"
 
 include MoneyHelper
 
