@@ -3,7 +3,7 @@ require 'rack'
 
 class HelloApp
   def call(env)
-    content = env.map {[key, value] "#{key} => #{value}"}.sort.join("\n")
+    content = env.map {|key, value| "#{key} => #{value}"}.sort.join("\n")
     [200, {"Content-type" => "text/plain"}, [content]]
   end
 end
