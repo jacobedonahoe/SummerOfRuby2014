@@ -1,19 +1,51 @@
 require 'rack'
+class BrowserDetector
+  def initialize(agent)
+    @agent = agent
+  end
+  def is_firefox?
+    @agent.include?("Firefox")
+   end
 
-
-
-class HelloApp
-  def call(env)
-if env.include?("HTTP_USER_AGENT")
-  content = "<h1>Hello there</h1>"
-else
-  content = "I don't recognize your browser"
-end
-    [200, {"Content-type" => "text/plain"}, [content]]
+  def is_ie?
+    @agent.include?("MSIE") && @agent.include?("Trident")
+  end
+  
+  def is_chrome?
+    @agent.include?("Chrome/")
   end
 end
 
-app = HelloApp.new
+class BrowserDetect
+  def initialize
+    @content = ""
+  end
 
-server = Rack::Server.new :app => app, :server=> "webrick" 
-server.start
+  def call(env)
+    create_content BrowserDetector.new(env["HTTP_USER_AGENT"])
+    render_response
+  end
+  
+  private
+    def create_content(browser)
+    @content = if browser.is_firefox?
+              "It's Firefox"
+            elsif browser.is_ie?
+              "why are you using IE?"
+            elsif browser.is_chrome?
+              "Hi, Chrome User!"
+            else
+              "I don't recognize your browser."
+            end
+  end
+  
+  def render_response
+    [200, {"content-type" => "text/plain"}, [@content]]
+  end
+
+end
+
+app = BrowserDetect.new
+
+
+Rack::Server.new (:app => app, :server=> "webrick" ).start
