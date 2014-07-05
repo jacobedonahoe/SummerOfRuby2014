@@ -10,6 +10,9 @@ end
 include Render
 
 app = Rack::Builder.new do
+  use Rack::Auth::Basic, "The way is Perilous, you should go back" do |user, password|
+    user == 'super' && password == 'secretsauce'
+  end
   map "/" do
     run lambda{ |env|
     step_name = "step_one"
