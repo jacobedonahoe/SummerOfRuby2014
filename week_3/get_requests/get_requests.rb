@@ -6,9 +6,10 @@ class LinksApp
       <ol>
         <li><a href="/answer?choice=1">First Choice</a></li>
         <li><a href="/answer?choice=2">Second Choice</a></li>
-        <li><a href="/answer?choice=3">Third Choice</a><li>
+        <li><a href="/answer?choice=3">Third Choice</a></li>
       <ol>
     }
+    [200, {"Content-type" => "text/html"}, [content] ]
   end
 end
 class AnswerApp
@@ -37,4 +38,4 @@ app = Rack::Builder.new do
   end
 end
 
-Rack::Server.new (:app => app, :server => "webrick").start
+Rack::Server.new(:app => app, :server => "webrick").start
