@@ -13,4 +13,7 @@ class ProductCatalog
     query = query.downcase
     self.products.select{|p| p.name.downcase.include?(query)}
   end
+  def find_all
+    self.products.select{|p| p}
+  end
 end
