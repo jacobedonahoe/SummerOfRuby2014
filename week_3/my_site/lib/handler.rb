@@ -1,4 +1,4 @@
-module Handler
+class Handler
   def call(env)
     request = Rack::Request.new(env)
     if request.post?
