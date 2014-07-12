@@ -1,8 +1,8 @@
 require 'rack'
 require_relative 'render_page'
 require_relative 'handler'
-class Application
 include RenderPage
+class Application
   def self.run
     app = Rack::Builder.new do
       map "/" do
