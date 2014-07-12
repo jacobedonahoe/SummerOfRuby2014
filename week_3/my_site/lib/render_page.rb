@@ -31,7 +31,8 @@ module RenderPage
     end
   end
 
-  def render_page(env,page_name)
+  def render_page(env)
+    page_name = env["REQUEST_PATH"]
     if page_name == "/submit_contact"
       self.handle(env)
     else
