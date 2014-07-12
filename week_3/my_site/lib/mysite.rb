@@ -5,7 +5,7 @@ require_relative 'handler'
 class Page
   include RenderPage
   def call(env)
-    render_page(env,env["REQUEST_PATH"])
+    render_page(env)
   end
 end
 
@@ -14,4 +14,3 @@ class Application
     app = Page.new
   end
 end
-
