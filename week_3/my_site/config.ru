@@ -1,4 +1,4 @@
 require 'rack'
 require './lib/mysite'
 
-run Application.run
+run Application.new.run
