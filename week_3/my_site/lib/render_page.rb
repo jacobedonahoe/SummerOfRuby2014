@@ -3,14 +3,14 @@ module RenderPage
   def handle(env)
     request = Rack::Request.new(env)
     if request.post?
-      name = request.GET["name"]
-      name = name == "" ? "you didn't enter a name" : request.GET["name"]
+      name = request.POST["name"]
+      name = "Please enter a default name" if name == "" || name.nil?
 
-      email = request.GET["email_address"]
-      email = email == "" ? "you didn't enter an email address" : request.GET["name"]
+      email = request.POST["email_address"]
+      email = "Please enter an email address" if name == "" || name.nil?
 
-      comments = request.GET["comments"]
-      comments = comments == "" ? "you didn't enter any comments!" : request.GET["name"]
+      comments = request.POST["comments"]
+      comments = "Please enter some comments" if comments = "" || name.nil?
 
       content = %Q{
         <!DOCTYPE html>
@@ -38,7 +38,7 @@ module RenderPage
     else
       page_name = page_name == "/" ? "home_page" : page_name
 
-      content = File.read("./lib/html#{page_name}.html")
+      content = File.read("./lib/html/#{page_name}.html")
 
       [200, {"content-type" => "text/html"}, [content]]
     end
