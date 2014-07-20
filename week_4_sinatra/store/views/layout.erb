@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="outf-8">
+    <title><%= @title %></title>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to the store</h1>
+    </header>
+    <section class="main">
+      <%= yield %>
+    </section>
+    <footer>
+      Copyright <%= Date.today.year %> Jacob Donahoe
+    </footer>
+  </body>
+</html>
