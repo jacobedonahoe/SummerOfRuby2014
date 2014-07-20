@@ -14,29 +14,10 @@ SQL
 
 get "/items" do
   results = CONNECTION.execute("select name,price from items order by ROWID desc limit 20")
-  tablerows= results.collect do |row|
+  @tablerows= results.collect do |row|
     "<tr><td>#{row[0]}</td><td>#{row[1]}</td></tr>"
   end
-
-  %Q{
-    <h1>Items</h1>
-    <fieldset>
-      <legend>Add item</legend>
-      <form action="/items" method="POST">
-        <label>Name: <input type="text" name="name"></label>
-        <label>Price: <input type="number" name="price"></label>
-        <input type="submit" name="Add">
-      </form>
-    </fieldset>
-
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-      </tr>
-      #{tablerows.join}
-    </table>
-  }
+  erb :items
 end
 
 get "/items/:id" do
