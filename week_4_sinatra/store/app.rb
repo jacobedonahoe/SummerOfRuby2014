@@ -24,18 +24,8 @@ get "/items/:id" do
   id = params[:id]
   result = CONNECTION.execute("select id,name,price from items where id=(?)", id)
   item = result[0]
-  output = "<tr><td>#{item[0]}</td><td>#{item[1]}</td><td>#{item[2]}</td></tr>"
-  %Q{
-    <h1>The item you have requested..</h1>
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-      </tr>
-      #{output}
-    </table>
-  }
+  @output = "<tr><td>#{item[0]}</td><td>#{item[1]}</td><td>#{item[2]}</td></tr>"
+  erb :id
 end
 
 post "/items" do
