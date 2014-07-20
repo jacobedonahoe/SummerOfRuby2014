@@ -22,6 +22,14 @@ get "/links" do
   erb :links
 end
 
+get "/people" do
+  @title = "people"
+  @people = [
+    {first_name: "Jacob", last_name: "Donahoe"},
+    {first_name: "Rachel", last_name: "Donahoe"},
+    {first_name: "Bryan", last_name: "Blomberg"}
+  ]
+end
 __END__
 
 @@ links
@@ -33,6 +41,16 @@ __END__
   </ol>
 <% else %>
   <p>There are no links to display.</p>
+<% end %>
+
+@@ people
+<% if @people.length > 0 %>
+  <table>
+    <tr><th>First Name</th><th>Last Name</th></tr>
+    <% @people.each do |person| %>
+      <tr><td><%= person[:first_name] %></td><td><%= person[:last_name] %></td></tr>
+    <% end %>
+  </table>
 <% end %>
 
 @@ index
