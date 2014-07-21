@@ -29,6 +29,7 @@ get "/people" do
     {first_name: "Rachel", last_name: "Donahoe"},
     {first_name: "Bryan", last_name: "Blomberg"}
   ]
+  erb :people
 end
 __END__
 
