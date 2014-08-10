@@ -1,5 +1,5 @@
 require 'bundler'
-Bundler.Require
+Bundler.require
 
 require_relative "app"
 
