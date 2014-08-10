@@ -53,7 +53,7 @@ class MyApp < Sinatra::Base
     result = CONNECTION.execute("select id, name, url, description from links where id=(?)", id)
     link = result[0]
     @output = %Q{
-    <tr><td>#{link[1]}</td><td><a href="#{link[2]}">#{link[2]}</a></td><td>#{link[3]}</td></tr>
+    <tr><td>#{link[1]}</td><td><a href="http://#{link[2]}">#{link[2]}</a></td><td>#{link[3]}</td></tr>
     }
     erb :id
   end
